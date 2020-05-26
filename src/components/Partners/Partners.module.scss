@@ -1,0 +1,81 @@
+@mixin white-gradient {
+    background: linear-gradient(to right, rgb(49, 49, 49) 0%);
+  }
+
+  // Animation
+  @keyframes scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(calc(-250px * 7));
+    }
+  }
+
+  // Styling
+  .slider {
+    background: #272727;
+    box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.125);
+    height: 100px;
+    margin: auto;
+    overflow: hidden;
+    position: relative;
+    width: 100vw;
+
+    &::before,
+    &::after {
+      @include white-gradient;
+      content: "";
+      height: 100px;
+      position: absolute;
+      width: 200px;
+      z-index: 2;
+    }
+
+    &::after {
+      right: 0;
+      top: 0;
+      transform: rotateZ(180deg);
+    }
+
+    &::before {
+      left: 0;
+      top: 0;
+    }
+
+    .slide-track {
+      list-style: none;
+      animation: scroll 40s linear infinite;
+      display: flex;
+      width: calc(250px * 38);
+    }
+
+    .slide {
+      height: 100px;
+      width: 250px;
+    }
+  }
+
+  .headline {
+    font-size: 2em;
+    text-align: center;
+    background-color: #272727;
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    padding-top: 0.4em;
+  }
+
+  @media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+    .headline {
+      font-size: 1.5em;
+    }
+  }
+
+  .btn-bg {
+    background-color: green;
+    text-align: center;
+    background-color: #272727;
+    padding: 1em;
+  }

@@ -1,0 +1,44 @@
+
+.container {
+    // position: absolute;
+    list-style: none;
+    background: #e9e9e9;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+  }
+
+  .item {
+    padding: 1em 1em;
+    width: 10em;
+  }
+
+  .headline {
+    font-size: 2em;
+    color: #1a1a1b;
+    text-align: center;
+    background-color: #e9e9e9;
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    padding-top: 0.4em;
+  }
+
+  @media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+    .item {
+      padding: 1em 1em;
+      width: 6em;
+    }
+    .headline {
+      font-size: 1.5em;
+    }
+  }
+
+  .btn-bg {
+    background-color: green;
+    text-align: center;
+    background-color: #e9e9e9;
+  }
