@@ -2,9 +2,11 @@ import React from "react"
 import Grid from "../Grid/Grid"
 import styled from "styled-components"
 
-const Section = styled.section`
-  padding: 60px 30px;
-`
+require("dotenv").config({
+  path: `.env.${process.env}`,
+})
+
+const Section = styled.section``
 
 const Title = styled.h1`
   margin-top: 0;
@@ -78,11 +80,37 @@ const Form = styled.form`
   }
 `
 
-const FormCont = () => {
+const sendForm = (event) => {
+  // Object with values of the form
+  const bodydata = {
+    fromName:document.getElementById('contact').name.value,
+    from:document.getElementById('contact').email.value,
+    // send to Kelvin's email address for testing but should be changed to info@ later on
+    to:"kelvin_lee@leaderradio.cn",
+    subject:"Message from weareready.cn web form",
+    html:document.getElementById('contact').message.value,
+    apiUser:process.env.SENDCLOUD_API_USER,
+    apiKey:process.env.SENDCLOUD_API_KEY
+  };
+  // POST using JavScript Fetch
+  const requestOptions = {
+    method: 'POST',
+    redirect: 'follow'
+  };
+  fetch(`https://cors-anywhere.herokuapp.com/http://api.sendcloud.net/apiv2/mail/send?fromName=${bodydata.fromname}&from=${bodydata.from}&to=${bodydata.to}&subject=Message from webform&html=${bodydata.html}&apiUser=${bodydata.apiUser}&apiKey=${bodydata.apiKey}`, requestOptions)
+    .then(response => response.text())
+    // todo: should redirect to success page upon success
+    .then(result => console.log(result))
+    .catch(error => console.log('error', error));
+  // Prevent whole page from refreshing after button clicked
+  event.preventDefault();
+}
+
+const Contact = () => {
   return (
     <Section className="section-padding">
       <Grid>
-        <Title>Contact</Title>
+        <Title>Contact.</Title>
         <SubContent>
           <SubTitle>Looking for more information?</SubTitle>
           <p>
@@ -91,7 +119,7 @@ const FormCont = () => {
             Sed ut arcu efficitur, auctor purus sed, venenatis velit. Etiam
             mauris metus, tempor vel convallis vitae, auctor id risus.
           </p>
-          <Form name="contact" netlify>
+          <Form id="contact" name="contact" netlify>
             <input placeholder="Your name" type="text" name="name" />
             <input placeholder="Your email" type="email" name="email" />
             <textarea
@@ -99,7 +127,8 @@ const FormCont = () => {
               name="message"
               rows="5"
             ></textarea>
-            <button className="btn" type="submit">
+            {/* <button className="btn" type="submit"> */}
+            <button className="btn" type="submit" onClick={sendForm}>
               Send Message
             </button>
           </Form>
@@ -109,4 +138,4 @@ const FormCont = () => {
   )
 }
 
-export default FormCont
+export default Contact

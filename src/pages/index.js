@@ -20,6 +20,9 @@ const IndexPage = () => {
       <VideoBg/>
       <section classNama="intro">
         <h2>Products we deliver</h2>
+        <div>
+
+        </div>
       </section>
       <section classNama="advantages">
         <h2>Our Advantages</h2>
